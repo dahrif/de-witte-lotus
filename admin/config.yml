@@ -1,0 +1,78 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+locale: nl
+
+collections:
+  - name: "instellingen"
+    label: "Instellingen website"
+    files:
+      - name: "algemeen"
+        label: "Algemene gegevens"
+        file: "data/algemeen.json"
+        fields:
+          - { label: "Organisatienaam", name: "naam", widget: "string" }
+          - { label: "Telefoonnummer", name: "telefoon", widget: "string" }
+          - { label: "E-mailadres", name: "email", widget: "string" }
+          - { label: "Adres", name: "adres", widget: "string" }
+          - { label: "Openingstijden", name: "openingstijden", widget: "string" }
+
+      - name: "hero"
+        label: "Homepagina – Bovenste tekst (Hero)"
+        file: "data/hero.json"
+        fields:
+          - { label: "Grote titel", name: "titel", widget: "string" }
+          - { label: "Ondertitel / intro tekst", name: "intro", widget: "text" }
+          - { label: "Knop 1 tekst", name: "knop1", widget: "string", default: "Aanmelden" }
+          - { label: "Knop 2 tekst", name: "knop2", widget: "string", default: "Ons aanbod" }
+
+      - name: "beloftes"
+        label: "Onze beloftes (3 blokken)"
+        file: "data/beloftes.json"
+        fields:
+          - label: "Belofte 1"
+            name: "b1"
+            widget: "object"
+            fields:
+              - { label: "Titel", name: "titel", widget: "string" }
+              - { label: "Tekst", name: "tekst", widget: "text" }
+          - label: "Belofte 2"
+            name: "b2"
+            widget: "object"
+            fields:
+              - { label: "Titel", name: "titel", widget: "string" }
+              - { label: "Tekst", name: "tekst", widget: "text" }
+          - label: "Belofte 3"
+            name: "b3"
+            widget: "object"
+            fields:
+              - { label: "Titel", name: "titel", widget: "string" }
+              - { label: "Tekst", name: "tekst", widget: "text" }
+
+      - name: "diensten"
+        label: "Diensten (Ambulant + Wonen)"
+        file: "data/diensten.json"
+        fields:
+          - label: "Ambulante begeleiding"
+            name: "ambulant"
+            widget: "object"
+            fields:
+              - { label: "Titel", name: "titel", widget: "string" }
+              - { label: "Beschrijving", name: "tekst", widget: "text" }
+          - label: "Wonen met begeleiding"
+            name: "wonen"
+            widget: "object"
+            fields:
+              - { label: "Titel", name: "titel", widget: "string" }
+              - { label: "Beschrijving", name: "tekst", widget: "text" }
+
+      - name: "contact_pagina"
+        label: "Contact sectie tekst"
+        file: "data/contact.json"
+        fields:
+          - { label: "Titel", name: "titel", widget: "string", default: "Contact opnemen" }
+          - { label: "Intro tekst", name: "intro", widget: "text" }

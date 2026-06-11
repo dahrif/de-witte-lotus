@@ -3,116 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zorggroep de Witte Lotus – Begeleiding die past bij jouw leven</title>
+<title>Zorggroep de Witte Lotus</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --pd:#3F0080;--pdd:#200060;--pm:#6020A0;--pl:#C0A0E0;--pp:#EDE4F8;
   --gold:#FDBA2C;--gl:#FFF4D6;
   --w:#FFFFFF;--ow:#F8F5FF;
-  --tb:#2A1850;--tm:#7A6B9A;
-  --br:rgba(63,0,128,0.12);
+  --tb:#2A1850;--tm:#7A6B9A;--br:rgba(63,0,128,0.12);
 }
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;font-size:16px;color:var(--tb);background:var(--w);overflow-x:hidden}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 5vw;height:72px;
-  background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--br);
-  transition:box-shadow .3s, background .3s;
-}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:72px;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--br);transition:box-shadow .3s}
 nav.scrolled{box-shadow:0 4px 24px rgba(63,0,128,.1)}
 .logo{display:flex;align-items:center;gap:14px;text-decoration:none}
-.logo-mark{width:44px;height:44px;border-radius:50%;background:var(--pp);overflow:hidden;display:flex;align-items:center;justify-content:center;transition:transform .4s ease}
+.logo-mark{width:44px;height:44px;border-radius:50%;background:var(--pp);display:flex;align-items:center;justify-content:center;transition:transform .4s}
 .logo:hover .logo-mark{transform:rotate(20deg)}
 .logo-text span:first-child{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pm);font-weight:500}
 .logo-text span:last-child{display:block;font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--pdd)}
 .nav-links{display:flex;gap:32px;list-style:none;font-size:14px}
 .nav-links a{color:var(--tm);text-decoration:none;transition:color .2s;position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);border-radius:2px;transition:width .3s ease}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);border-radius:2px;transition:width .3s}
 .nav-links a:hover{color:var(--pd)}.nav-links a:hover::after{width:100%}
-.nav-cta{background:var(--pd);color:var(--w);border:none;border-radius:30px;padding:10px 22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s}
-.nav-cta:hover{background:var(--pdd);transform:translateY(-1px);box-shadow:0 6px 18px rgba(63,0,128,.3)}
+.nav-cta{background:var(--pd);color:var(--w);border:none;border-radius:30px;padding:10px 22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s}
+.nav-cta:hover{background:var(--pdd);transform:translateY(-1px)}
 
-/* ── HERO ── */
-.hero{
-  position:relative;min-height:100vh;
-  display:grid;grid-template-columns:1fr 1fr;gap:48px;
-  align-items:center;padding:120px 5vw 80px;overflow:hidden;
-}
+/* HERO */
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:120px 5vw 80px;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;transform:scale(1.08);transition:transform 8s ease-out}
 .hero-bg.loaded img{transform:scale(1)}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(248,245,255,.97) 0%,rgba(237,228,248,.88) 42%,rgba(32,0,96,.55) 100%)}
 .hero-content{position:relative;z-index:1}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.88);color:var(--pm);
-  border-radius:20px;padding:6px 16px;font-size:13px;font-weight:500;letter-spacing:.04em;
-  margin-bottom:22px;border:1px solid var(--br);
-  opacity:0;transform:translateY(20px);
-  animation:fadeUp .7s ease .2s forwards;
-}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.88);color:var(--pm);border-radius:20px;padding:6px 16px;font-size:13px;font-weight:500;margin-bottom:22px;border:1px solid var(--br);opacity:0;animation:fadeUp .7s ease .2s forwards}
 .hero-tag::before{content:'●';font-size:8px;color:var(--gold);animation:pulse 2s ease infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{
-  font-family:'Fraunces',serif;font-size:clamp(34px,4.2vw,54px);font-weight:700;
-  line-height:1.14;color:var(--pdd);margin-bottom:22px;
-  opacity:0;transform:translateY(28px);
-  animation:fadeUp .7s ease .35s forwards;
-}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(34px,4.2vw,54px);font-weight:700;line-height:1.14;color:var(--pdd);margin-bottom:22px;opacity:0;animation:fadeUp .7s ease .35s forwards}
 .hero h1 em{font-style:italic;color:var(--pm)}
-.hero-lead{
-  font-size:16px;line-height:1.75;color:var(--tm);max-width:460px;margin-bottom:36px;
-  opacity:0;transform:translateY(28px);
-  animation:fadeUp .7s ease .5s forwards;
-}
-.hero-actions{
-  display:flex;gap:14px;flex-wrap:wrap;
-  opacity:0;transform:translateY(28px);
-  animation:fadeUp .7s ease .65s forwards;
-}
-.btn-primary{
-  background:var(--pd);color:var(--w);border:none;border-radius:30px;padding:14px 28px;
-  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;
-  transition:background .2s,transform .2s,box-shadow .2s;
-  box-shadow:0 4px 20px rgba(63,0,128,.28);
-  position:relative;overflow:hidden;
-}
-.btn-primary::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);opacity:0;transition:opacity .2s}
-.btn-primary:hover{background:var(--pdd);transform:translateY(-2px);box-shadow:0 8px 28px rgba(63,0,128,.35)}
-.btn-primary:hover::after{opacity:1}
-.btn-outline{
-  background:rgba(255,255,255,.85);color:var(--pd);
-  border:1.5px solid var(--pl);border-radius:30px;padding:13px 28px;
-  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;
-  transition:background .2s,border-color .2s,transform .2s;
-}
-.btn-outline:hover{background:var(--pp);border-color:var(--pd);transform:translateY(-2px)}
-
-.hero-visual{
-  position:relative;z-index:1;display:flex;flex-direction:column;gap:14px;
-  opacity:0;transform:translateX(30px);
-  animation:fadeRight .8s ease .6s forwards;
-}
-.hero-img-wrap{border-radius:24px;overflow:hidden;box-shadow:0 16px 48px rgba(63,0,128,.22);margin-bottom:4px;height:220px;position:relative}
-.hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;transition:transform .6s ease}
+.hero-lead{font-size:16px;line-height:1.75;color:var(--tm);max-width:460px;margin-bottom:36px;opacity:0;animation:fadeUp .7s ease .5s forwards}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s ease .65s forwards}
+.btn-primary{background:var(--pd);color:var(--w);border:none;border-radius:30px;padding:14px 28px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .2s,transform .2s;box-shadow:0 4px 20px rgba(63,0,128,.28)}
+.btn-primary:hover{background:var(--pdd);transform:translateY(-2px)}
+.btn-outline{background:rgba(255,255,255,.85);color:var(--pd);border:1.5px solid var(--pl);border-radius:30px;padding:13px 28px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .2s,transform .2s}
+.btn-outline:hover{background:var(--pp);transform:translateY(-2px)}
+.hero-visual{position:relative;z-index:1;display:flex;flex-direction:column;gap:14px;opacity:0;animation:fadeRight .8s ease .6s forwards}
+.hero-img-wrap{border-radius:24px;overflow:hidden;box-shadow:0 16px 48px rgba(63,0,128,.22);height:220px}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
 .hero-img-wrap:hover img{transform:scale(1.04)}
-.hero-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(32,0,96,.2) 0%,transparent 60%)}
-.choice-card{
-  background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.7);
-  border-radius:20px;padding:20px 24px;
-  display:flex;align-items:center;gap:18px;
-  cursor:pointer;text-decoration:none;color:inherit;backdrop-filter:blur(8px);
-  transition:box-shadow .3s,transform .3s,border-color .3s;
-}
-.choice-card:hover{box-shadow:0 10px 36px rgba(63,0,128,.14);transform:translateY(-3px);border-color:var(--pl)}
+.choice-card{background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:20px 24px;display:flex;align-items:center;gap:18px;cursor:pointer;text-decoration:none;color:inherit;backdrop-filter:blur(8px);transition:box-shadow .3s,transform .3s}
+.choice-card:hover{box-shadow:0 10px 36px rgba(63,0,128,.14);transform:translateY(-3px)}
 .choice-card.gold{border-left:4px solid var(--gold)}
 .choice-card.purple{border-left:4px solid var(--pd)}
 .c-ico{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;transition:transform .3s}
@@ -124,19 +68,19 @@ nav.scrolled{box-shadow:0 4px 24px rgba(63,0,128,.1)}
 .c-arr{margin-left:auto;font-size:18px;color:var(--pl);transition:transform .3s,color .3s}
 .choice-card:hover .c-arr{transform:translateX(5px);color:var(--pd)}
 
-/* ── STATS ── */
+/* STATS */
 .stats-stripe{background:var(--pdd);padding:36px 5vw;display:grid;grid-template-columns:repeat(4,1fr)}
 .stat-item{text-align:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.1)}
 .stat-item:last-child{border-right:none}
 .stat-num{font-family:'Fraunces',serif;font-size:40px;font-weight:700;color:var(--gold);line-height:1}
 .stat-lbl{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px;line-height:1.3}
 
-/* ── SHARED SECTION LABELS ── */
+/* SHARED */
 .section-label{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:12px}
 .section-title{font-family:'Fraunces',serif;font-size:clamp(26px,3.2vw,38px);font-weight:700;color:var(--pdd);line-height:1.2;margin-bottom:14px}
 .section-lead{font-size:16px;line-height:1.75;color:var(--tm);max-width:560px;margin-bottom:44px}
 
-/* ── SCROLL REVEAL ── */
+/* SCROLL REVEAL */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease}
@@ -148,26 +92,21 @@ nav.scrolled{box-shadow:0 4px 24px rgba(63,0,128,.1)}
 .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}
 .stagger-4{transition-delay:.4s}.stagger-5{transition-delay:.5s}.stagger-6{transition-delay:.6s}
 
-/* ── PROMISES ── */
+/* PROMISES */
 .promises{padding:88px 5vw;background:var(--w)}
 .promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.promise-card{
-  background:var(--ow);border-radius:20px;padding:32px 28px;
-  border:1px solid transparent;
-  transition:border-color .3s,box-shadow .3s,transform .3s;
-  position:relative;overflow:hidden;
-}
-.promise-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.promise-card{background:var(--ow);border-radius:20px;padding:32px 28px;border:1px solid transparent;transition:border-color .3s,box-shadow .3s,transform .3s;position:relative;overflow:hidden}
+.promise-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s}
 .promise-card:hover{border-color:var(--pl);box-shadow:0 8px 32px rgba(63,0,128,.1);transform:translateY(-4px)}
 .promise-card:hover::before{transform:scaleX(1)}
 .promise-num{font-family:'Fraunces',serif;font-size:34px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:14px}
 .promise-card h3{font-size:16px;font-weight:500;color:var(--pdd);margin-bottom:9px}
 .promise-card p{font-size:14px;line-height:1.7;color:var(--tm)}
 
-/* ── VOOR WIE ── */
+/* VOOR WIE */
 .for-who{display:grid;grid-template-columns:1fr 1fr;min-height:580px;background:var(--pdd)}
 .for-who-img{position:relative;overflow:hidden}
-.for-who-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;transition:transform 10s ease}
+.for-who-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;transition:transform 10s}
 .for-who:hover .for-who-img img{transform:scale(1.06)}
 .for-who-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,var(--pdd) 100%)}
 .for-who-content{padding:72px 5vw 72px 44px;display:flex;flex-direction:column;justify-content:center}
@@ -175,42 +114,36 @@ nav.scrolled{box-shadow:0 4px 24px rgba(63,0,128,.1)}
 .for-who .section-title{color:var(--w);margin-bottom:14px}
 .for-who-lead{font-size:15px;line-height:1.75;color:rgba(255,255,255,.7);margin-bottom:26px;max-width:440px}
 .target-list{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px}
-.target-pill{
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
-  border-radius:30px;padding:7px 15px;font-size:13px;color:rgba(255,255,255,.9);
-  cursor:default;transition:background .25s,border-color .25s,transform .25s;
-}
+.target-pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:7px 15px;font-size:13px;color:rgba(255,255,255,.9);transition:background .25s,border-color .25s,transform .25s;cursor:default}
 .target-pill:hover{background:rgba(253,186,44,.15);border-color:var(--gold);transform:translateY(-2px)}
 .for-who-note{font-size:13px;line-height:1.7;color:rgba(255,255,255,.55);max-width:420px}
 
-/* ── SERVICES ── */
+/* SERVICES */
 .services{padding:88px 5vw;background:var(--ow)}
 .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-.service-card{
-  background:var(--w);border-radius:24px;border:1px solid var(--br);overflow:hidden;
-  transition:box-shadow .3s,transform .3s;
-}
+.service-card{background:var(--w);border-radius:24px;border:1px solid var(--br);overflow:hidden;transition:box-shadow .3s,transform .3s}
 .service-card:hover{box-shadow:0 16px 48px rgba(63,0,128,.13);transform:translateY(-6px)}
 .svc-img{height:230px;overflow:hidden;position:relative}
-.svc-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s ease}
+.svc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s}
 .service-card:hover .svc-img img{transform:scale(1.07)}
 .svc-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(32,0,96,.6) 100%)}
-.svc-tag{position:absolute;bottom:16px;left:18px;background:var(--gold);color:var(--pdd);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;letter-spacing:.04em;z-index:2;transition:transform .3s}
+.svc-tag{position:absolute;bottom:16px;left:18px;background:var(--gold);color:var(--pdd);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;z-index:2;transition:transform .3s}
 .service-card:hover .svc-tag{transform:translateY(-3px)}
 .svc-body{padding:28px 26px}
 .service-card h3{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--pdd);margin-bottom:11px}
 .service-card p{font-size:14px;line-height:1.7;color:var(--tm);margin-bottom:18px}
 .svc-list{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
 .svc-list li{font-size:14px;color:var(--tb);display:flex;align-items:center;gap:8px}
-.svc-list li::before{content:'→';color:var(--gold);font-size:13px;flex-shrink:0;transition:transform .2s}
-.service-card:hover .svc-list li::before{transform:translateX(3px)}
-.svc-link{display:inline-flex;align-items:center;gap:6px;color:var(--pd);font-weight:500;font-size:14px;text-decoration:none;transition:gap .25s}
+.svc-list li::before{content:'→';color:var(--gold);font-size:13px;flex-shrink:0}
+.svc-link{display:inline-flex;align-items:center;gap:6px;color:var(--pd);font-weight:500;font-size:14px;text-decoration:none;transition:gap .2s}
 .svc-link:hover{gap:10px}
+.svc-cta{display:inline-block;background:var(--pd);color:var(--w);border-radius:30px;padding:11px 22px;font-size:14px;font-weight:500;text-decoration:none;margin-top:14px;border-top:1px solid var(--br);width:100%;text-align:center;transition:background .2s,transform .15s}
+.svc-cta:hover{background:var(--pdd);transform:translateY(-1px)}
 
-/* ── GALERIE MOSAÏEK ── */
+/* GALERIE */
 .galerie-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:250px 250px;gap:3px}
 .g-item{overflow:hidden;position:relative;cursor:pointer}
-.g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease,filter .4s}
+.g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s,filter .4s}
 .g-item:hover img{transform:scale(1.08);filter:brightness(1.05)}
 .g-item:nth-child(1){grid-column:1/3;grid-row:1/2}
 .g-item:nth-child(2){grid-column:3/4;grid-row:1/2}
@@ -218,83 +151,83 @@ nav.scrolled{box-shadow:0 4px 24px rgba(63,0,128,.1)}
 .g-item:nth-child(4){grid-column:1/2;grid-row:2/3}
 .g-item:nth-child(5){grid-column:2/4;grid-row:2/3}
 .g-item:nth-child(6){grid-column:4/5;grid-row:2/3}
-.g-label{
-  position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;
-  background:linear-gradient(to top,rgba(32,0,96,.72) 0%,transparent 55%);
-  opacity:0;transition:opacity .4s;
-}
+.g-label{position:absolute;inset:0;display:flex;align-items:flex-end;padding:20px;background:linear-gradient(to top,rgba(32,0,96,.72) 0%,transparent 55%);opacity:0;transition:opacity .4s}
 .g-item:hover .g-label{opacity:1}
-.g-label span{font-family:'Fraunces',serif;font-size:15px;font-style:italic;color:var(--w);transform:translateY(8px);transition:transform .4s;line-height:1.3}
+.g-label span{font-family:'Fraunces',serif;font-size:15px;font-style:italic;color:var(--w);transform:translateY(8px);transition:transform .4s}
 .g-item:hover .g-label span{transform:translateY(0)}
 
-/* ── WERKWIJZE ── */
+/* WERKWIJZE */
 .werkwijze{padding:88px 5vw;background:var(--w)}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;position:relative}
 .steps::before{content:'';position:absolute;top:27px;left:8%;right:8%;height:1px;background:var(--br);z-index:0}
-.steps::after{
-  content:'';position:absolute;top:27px;left:8%;height:1px;
-  background:var(--gold);z-index:1;
-  width:0;transition:width 1.2s ease;
-}
+.steps::after{content:'';position:absolute;top:27px;left:8%;height:1px;background:var(--gold);z-index:1;width:0;transition:width 1.2s ease}
 .steps.animated::after{width:84%}
 .step{position:relative;z-index:2;text-align:center;padding:0 10px}
-.step-num{
-  width:54px;height:54px;border-radius:50%;
-  background:var(--w);border:2px solid var(--pl);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--pd);
-  margin:0 auto 18px;
-  transition:background .3s,border-color .3s,color .3s,transform .3s,box-shadow .3s;
-}
-.step:hover .step-num{background:var(--pd);border-color:var(--pd);color:var(--w);transform:scale(1.1);box-shadow:0 6px 20px rgba(63,0,128,.3)}
+.step-num{width:54px;height:54px;border-radius:50%;background:var(--w);border:2px solid var(--pl);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--pd);margin:0 auto 18px;transition:background .3s,border-color .3s,color .3s,transform .3s}
+.step:hover .step-num{background:var(--pd);border-color:var(--pd);color:var(--w);transform:scale(1.1)}
 .step h4{font-size:14px;font-weight:500;color:var(--pdd);margin-bottom:7px}
 .step p{font-size:13px;line-height:1.6;color:var(--tm)}
 
-/* ── SFEER BANNER parallax ── */
+/* SFEER BANNER */
 .sfeer-banner{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:440px}
 .sfeer-bg-img{position:absolute;inset:-60px 0;width:100%;height:calc(100% + 120px);object-fit:cover;object-position:center 40%;will-change:transform}
 .sfeer-banner::before{content:'';position:absolute;inset:0;background:rgba(32,0,96,.62);z-index:1}
 .sfeer-inner{position:relative;z-index:2;text-align:center;padding:80px 5vw;max-width:720px}
-.sfeer-inner blockquote{
-  font-family:'Fraunces',serif;font-size:clamp(22px,2.8vw,34px);font-style:italic;
-  font-weight:400;color:var(--w);line-height:1.45;margin-bottom:22px;
-}
+.sfeer-inner blockquote{font-family:'Fraunces',serif;font-size:clamp(22px,2.8vw,34px);font-style:italic;color:var(--w);line-height:1.45;margin-bottom:22px}
 .sfeer-inner blockquote::before{content:'"';font-size:80px;line-height:.45;vertical-align:-.38em;color:var(--gold);display:block;margin-bottom:10px}
 .sfeer-inner cite{font-style:normal;font-size:14px;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase}
+.sfeer-inner .sfeer-cta{display:inline-block;background:#fff;color:var(--pd);border-radius:30px;padding:13px 26px;font-size:15px;font-weight:500;text-decoration:none;margin-top:28px;transition:transform .2s}
+.sfeer-inner .sfeer-cta:hover{transform:translateY(-2px)}
 
-/* ── KWALITEIT ── */
+/* KWALITEIT */
 .kwaliteit{padding:88px 5vw;background:#FAF8FF;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 .quality-items{display:flex;flex-direction:column;gap:14px;margin-top:28px}
-.quality-item{
-  display:flex;gap:14px;align-items:flex-start;padding:16px 18px;
-  border-radius:16px;background:var(--w);border:1px solid var(--br);
-  transition:border-color .3s,box-shadow .3s,transform .3s;
-}
-.quality-item:hover{border-color:var(--pl);box-shadow:0 4px 18px rgba(63,0,128,.08);transform:translateX(5px)}
-.q-ico{
-  width:40px;height:40px;border-radius:10px;background:var(--pp);
-  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
-  transition:transform .3s;
-}
+.quality-item{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:16px;background:var(--w);border:1px solid var(--br);transition:border-color .3s,transform .3s}
+.quality-item:hover{border-color:var(--pl);transform:translateX(5px)}
+.q-ico{width:40px;height:40px;border-radius:10px;background:var(--pp);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:transform .3s}
 .quality-item:hover .q-ico{transform:scale(1.15) rotate(-5deg)}
 .quality-item h4{font-size:15px;font-weight:500;color:var(--pdd);margin-bottom:4px}
 .quality-item p{font-size:13px;line-height:1.5;color:var(--tm)}
 .kw-img-wrap{border-radius:28px;overflow:hidden;position:relative;box-shadow:0 18px 60px rgba(63,0,128,.18)}
-.kw-img-wrap img{width:100%;height:500px;object-fit:cover;object-position:center 15%;display:block;transition:transform 8s ease}
+.kw-img-wrap img{width:100%;height:500px;object-fit:cover;object-position:center 15%;display:block;transition:transform 8s}
 .kw-img-wrap:hover img{transform:scale(1.04)}
 .kw-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(32,0,96,.72) 100%)}
 .kw-caption{position:absolute;bottom:28px;left:28px;right:28px;z-index:1;color:var(--w)}
 .kw-caption p{font-family:'Fraunces',serif;font-size:17px;font-style:italic;line-height:1.5}
 .kw-caption span{font-size:11px;color:rgba(255,255,255,.5);margin-top:7px;display:block;letter-spacing:.07em;text-transform:uppercase}
 
-/* ── AANMELDEN ── */
+/* CTA BARS */
+.cta-bar{padding:56px 5vw;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.cta-bar.dark{background:var(--pdd)}
+.cta-bar.gold-bg{background:var(--gold)}
+.cta-bar.light{background:var(--pp)}
+.cta-bar.mid{background:var(--pm)}
+.cta-bar-text .cta-eyebrow{font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;margin-bottom:8px;display:block}
+.cta-bar.dark .cta-eyebrow,.cta-bar.mid .cta-eyebrow{color:var(--gold)}
+.cta-bar.gold-bg .cta-eyebrow{color:var(--pdd);opacity:.7}
+.cta-bar.light .cta-eyebrow{color:var(--pm)}
+.cta-bar-text h3{font-family:'Fraunces',serif;font-weight:700;line-height:1.2;font-size:clamp(22px,2.8vw,32px);margin-bottom:8px}
+.cta-bar.dark h3,.cta-bar.mid h3{color:#fff}
+.cta-bar.gold-bg h3{color:var(--pdd)}
+.cta-bar.light h3{color:var(--pdd)}
+.cta-bar-text p{font-size:15px;line-height:1.6;max-width:520px}
+.cta-bar.dark p,.cta-bar.mid p{color:rgba(255,255,255,.7)}
+.cta-bar.gold-bg p{color:var(--pdd);opacity:.8}
+.cta-bar.light p{color:var(--tm)}
+.cta-bar-actions{display:flex;gap:12px;flex-shrink:0;flex-wrap:wrap;align-items:center}
+.cta-btn-white{background:#fff;color:var(--pd);border:none;border-radius:30px;padding:13px 26px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.cta-btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.cta-btn-ghost-white{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);border-radius:30px;padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .2s,transform .2s}
+.cta-btn-ghost-white:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.cta-btn-dark{background:var(--pdd);color:#fff;border:none;border-radius:30px;padding:13px 26px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .2s,box-shadow .2s}
+.cta-btn-dark:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(32,0,96,.35)}
+.cta-btn-ghost-dark{background:transparent;color:var(--pdd);border:1.5px solid var(--pl);border-radius:30px;padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .2s,transform .2s}
+.cta-btn-ghost-dark:hover{background:var(--pp);transform:translateY(-2px)}
+
+/* AANMELDEN */
 .aanmelden{padding:88px 5vw;background:var(--w)}
 .aanmelden-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
-.aanmeld-card{
-  border-radius:24px;padding:34px 26px;border:1.5px solid var(--br);
-  display:flex;flex-direction:column;
-  transition:border-color .3s,box-shadow .3s,transform .3s;
-}
+.aanmeld-card{border-radius:24px;padding:34px 26px;border:1.5px solid var(--br);display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s,transform .3s}
 .aanmeld-card:hover{border-color:var(--pl);box-shadow:0 10px 36px rgba(63,0,128,.1);transform:translateY(-5px)}
 .aanmeld-card.featured{background:var(--pdd);border-color:var(--pdd)}
 .card-icon{font-size:32px;margin-bottom:14px;display:block;transition:transform .3s}
@@ -303,29 +236,19 @@ nav.scrolled{box-shadow:0 4px 24px rgba(63,0,128,.1)}
 .aanmeld-card.featured h3{color:var(--w)}
 .aanmeld-card p{font-size:14px;line-height:1.7;color:var(--tm);flex:1;margin-bottom:22px}
 .aanmeld-card.featured p{color:rgba(255,255,255,.7)}
-.card-btn{
-  display:inline-flex;align-items:center;gap:8px;border-radius:30px;padding:11px 20px;
-  font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;border:none;
-  font-family:'DM Sans',sans-serif;transition:background .2s,transform .15s,gap .2s;
-}
+.card-btn{display:inline-flex;align-items:center;gap:8px;border-radius:30px;padding:11px 20px;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;border:none;font-family:'DM Sans',sans-serif;transition:background .2s,gap .2s}
 .card-btn:hover{gap:12px}
 .card-btn.dark{background:var(--pd);color:var(--w)}.card-btn.dark:hover{background:var(--pm)}
 .card-btn.light{background:rgba(255,255,255,.12);color:var(--w);border:1px solid rgba(255,255,255,.25)}.card-btn.light:hover{background:rgba(255,255,255,.2)}
 .card-btn.outline{background:transparent;color:var(--pd);border:1.5px solid var(--pl)}.card-btn.outline:hover{background:var(--pp)}
 
-.verwijzers-section{padding:88px 5vw;background:#FAF8FF}
-
-/* ── CONTACT ── */
+/* CONTACT */
 .contact{padding:88px 5vw;background:var(--ow);display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .contact-info h2{font-family:'Fraunces',serif;font-size:32px;font-weight:700;color:var(--pdd);margin-bottom:14px}
 .contact-info p{font-size:15px;line-height:1.75;color:var(--tm);margin-bottom:28px}
 .contact-details{display:flex;flex-direction:column;gap:12px}
-.contact-row{
-  display:flex;align-items:center;gap:14px;padding:13px 16px;
-  background:var(--w);border-radius:14px;border:1px solid var(--br);
-  transition:border-color .3s,transform .3s,box-shadow .3s;
-}
-.contact-row:hover{border-color:var(--pl);transform:translateX(5px);box-shadow:0 3px 14px rgba(63,0,128,.08)}
+.contact-row{display:flex;align-items:center;gap:14px;padding:13px 16px;background:var(--w);border-radius:14px;border:1px solid var(--br);transition:border-color .3s,transform .3s}
+.contact-row:hover{border-color:var(--pl);transform:translateX(5px)}
 .cr-ico{width:36px;height:36px;border-radius:10px;background:var(--pp);display:flex;align-items:center;justify-content:center;font-size:16px}
 .cr-lbl{font-size:11px;color:var(--tm);display:block}
 .cr-val{font-size:14px;color:var(--tb)}
@@ -333,169 +256,31 @@ nav.scrolled{box-shadow:0 4px 24px rgba(63,0,128,.1)}
 .contact-form h3{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--pdd);margin-bottom:22px}
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-size:13px;font-weight:500;color:var(--tb);margin-bottom:5px}
-.form-group input,.form-group select,.form-group textarea{
-  width:100%;padding:11px 15px;
-  border:1.5px solid var(--br);border-radius:12px;
-  font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tb);
-  background:var(--ow);outline:none;
-  transition:border-color .2s,background .2s,box-shadow .2s;
-}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
-  border-color:var(--pm);background:var(--w);box-shadow:0 0 0 3px rgba(96,32,160,.1);
-}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 15px;border:1.5px solid var(--br);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tb);background:var(--ow);outline:none;transition:border-color .2s,box-shadow .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--pm);background:var(--w);box-shadow:0 0 0 3px rgba(96,32,160,.1)}
 .form-group textarea{resize:vertical;min-height:96px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.submit-btn{
-  width:100%;background:var(--pd);color:var(--w);
-  border:none;border-radius:30px;padding:14px;
-  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;
-  transition:background .2s,transform .15s,box-shadow .2s;
-  box-shadow:0 4px 20px rgba(63,0,128,.2);
-  position:relative;overflow:hidden;
-}
-.submit-btn::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,.2);border-radius:50%;transform:translate(-50%,-50%);transition:width .5s,height .5s}
-.submit-btn:active::after{width:300px;height:300px}
-.submit-btn:hover{background:var(--pdd);transform:translateY(-2px);box-shadow:0 8px 28px rgba(63,0,128,.3)}
+.submit-btn{width:100%;background:var(--pd);color:var(--w);border:none;border-radius:30px;padding:14px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:background .2s,transform .15s;box-shadow:0 4px 20px rgba(63,0,128,.2)}
+.submit-btn:hover{background:var(--pdd);transform:translateY(-2px)}
 
-/* ── FOOTER ── */
+/* FOOTER */
 footer{background:var(--pdd);color:var(--w);padding:60px 5vw 30px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:44px}
 .footer-brand p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.6);max-width:340px;margin-top:14px}
 footer h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500}
 footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-footer ul li a{font-size:14px;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s,paddingLeft .2s}
+footer ul li a{font-size:14px;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s,padding-left .2s}
 footer ul li a:hover{color:var(--w);padding-left:6px}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.4)}
 
-/* ── KEYFRAMES ── */
+/* KEYFRAMES */
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
-@keyframes countUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── CTA BANNERS ── */
-.cta-bar{
-  padding:56px 5vw;
-  display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;
-}
-.cta-bar.dark{background:var(--pdd)}
-.cta-bar.gold-bg{background:var(--gold)}
-.cta-bar.light{background:var(--pp)}
-.cta-bar.mid{background:var(--pm)}
+/* CURSOR GLOW */
+.cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(192,160,224,.12) 0%,transparent 70%);pointer-events:none;z-index:999;transform:translate(-50%,-50%);transition:left .12s ease,top .12s ease}
 
-.cta-bar-text{}
-.cta-bar-text .cta-eyebrow{
-  font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;
-  margin-bottom:8px;display:block;
-}
-.cta-bar.dark .cta-eyebrow,.cta-bar.mid .cta-eyebrow{color:var(--gold)}
-.cta-bar.gold-bg .cta-eyebrow{color:var(--pdd);opacity:.7}
-.cta-bar.light .cta-eyebrow{color:var(--pm)}
-
-.cta-bar-text h3{
-  font-family:'Fraunces',serif;font-weight:700;line-height:1.2;
-  font-size:clamp(22px,2.8vw,32px);margin-bottom:8px;
-}
-.cta-bar.dark h3,.cta-bar.mid h3{color:#fff}
-.cta-bar.gold-bg h3{color:var(--pdd)}
-.cta-bar.light h3{color:var(--pdd)}
-
-.cta-bar-text p{font-size:15px;line-height:1.6;max-width:520px}
-.cta-bar.dark p,.cta-bar.mid p{color:rgba(255,255,255,.7)}
-.cta-bar.gold-bg p{color:var(--pdd);opacity:.8}
-.cta-bar.light p{color:var(--tm)}
-
-.cta-bar-actions{display:flex;gap:12px;flex-shrink:0;flex-wrap:wrap;align-items:center}
-
-.cta-btn-white{
-  background:#fff;color:var(--pd);
-  border:none;border-radius:30px;padding:13px 26px;
-  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
-  cursor:pointer;text-decoration:none;white-space:nowrap;
-  transition:transform .2s,box-shadow .2s,background .2s;
-  box-shadow:0 4px 16px rgba(0,0,0,.12);
-}
-.cta-btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.16);background:#f0e8ff}
-
-.cta-btn-ghost-white{
-  background:transparent;color:#fff;
-  border:1.5px solid rgba(255,255,255,.4);border-radius:30px;padding:12px 24px;
-  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
-  cursor:pointer;text-decoration:none;white-space:nowrap;
-  transition:background .2s,border-color .2s,transform .2s;
-}
-.cta-btn-ghost-white:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.7);transform:translateY(-2px)}
-
-.cta-btn-dark{
-  background:var(--pdd);color:#fff;
-  border:none;border-radius:30px;padding:13px 26px;
-  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
-  cursor:pointer;text-decoration:none;white-space:nowrap;
-  transition:transform .2s,box-shadow .2s,background .2s;
-  box-shadow:0 4px 16px rgba(32,0,96,.25);
-}
-.cta-btn-dark:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(32,0,96,.35);background:#160030}
-
-.cta-btn-ghost-dark{
-  background:transparent;color:var(--pdd);
-  border:1.5px solid var(--pl);border-radius:30px;padding:12px 24px;
-  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
-  cursor:pointer;text-decoration:none;white-space:nowrap;
-  transition:background .2s,border-color .2s,transform .2s;
-}
-.cta-btn-ghost-dark:hover{background:var(--pp);border-color:var(--pd);transform:translateY(-2px)}
-
-/* Inline CTA inside sections */
-.inline-cta{
-  display:flex;align-items:center;gap:20px;
-  background:var(--pp);border:1px solid var(--pl);
-  border-radius:20px;padding:22px 28px;margin-top:36px;
-  flex-wrap:wrap;
-}
-.inline-cta p{font-size:15px;color:var(--tb);flex:1;min-width:200px;line-height:1.5}
-.inline-cta strong{color:var(--pdd)}
-
-/* Sticky bottom CTA (mobile) */
-.sticky-cta{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;z-index:150;
-  background:var(--pdd);padding:14px 5vw;
-  flex-direction:row;align-items:center;justify-content:space-between;gap:12px;
-  box-shadow:0 -4px 24px rgba(32,0,96,.25);
-}
-.sticky-cta p{font-size:13px;color:rgba(255,255,255,.8);margin:0}
-.sticky-cta strong{color:#fff;display:block;font-size:14px}
-.sticky-cta-btn{
-  background:var(--gold);color:var(--pdd);
-  border:none;border-radius:30px;padding:11px 22px;
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
-  cursor:pointer;text-decoration:none;white-space:nowrap;flex-shrink:0;
-  transition:transform .2s,box-shadow .2s;
-}
-.sticky-cta-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
-@media(max-width:900px){
-  .sticky-cta{display:flex}
-  body{padding-bottom:70px}
-  .cta-bar{flex-direction:column;text-align:center}
-  .cta-bar-actions{justify-content:center}
-  .inline-cta{flex-direction:column;text-align:center}
-}
-
-/* ── FLOATING LOTUS (decoratif) ── */
-.floating-lotus{
-  position:absolute;opacity:.07;pointer-events:none;
-  animation:floatLotus 8s ease-in-out infinite;
-}
-@keyframes floatLotus{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(15deg)}}
-
-/* ── CURSOR GLOW ── */
-.cursor-glow{
-  position:fixed;width:300px;height:300px;border-radius:50%;
-  background:radial-gradient(circle,rgba(192,160,224,.12) 0%,transparent 70%);
-  pointer-events:none;z-index:999;transform:translate(-50%,-50%);
-  transition:left .12s ease,top .12s ease;
-}
-
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media(max-width:900px){
   .hero,.for-who,.kwaliteit,.contact{grid-template-columns:1fr}
   .for-who-img{height:300px}
@@ -514,14 +299,20 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
   .g-item:nth-child(5){grid-column:2/3;grid-row:3/4}
   .g-item:nth-child(6){display:none}
   .stats-stripe{grid-template-columns:repeat(2,1fr)}
-  .stat-item:nth-child(2){border-right:none}
+  .cta-bar{flex-direction:column;text-align:center}
   .cursor-glow{display:none}
+}
+
+/* ── CLOUDCANNON EDITABLE HIGHLIGHT ── */
+[data-cms-edit]:hover{
+  outline:2px dashed #FDBA2C !important;
+  outline-offset:3px;
+  cursor:pointer;
 }
 </style>
 </head>
 <body>
 
-<!-- Cursor glow -->
 <div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- NAV -->
@@ -543,7 +334,7 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
     </div>
     <div class="logo-text">
       <span>zorggroep</span>
-      <span>de Witte Lotus</span>
+      <span id="nav-naam">de Witte Lotus</span>
     </div>
   </a>
   <ul class="nav-links">
@@ -562,12 +353,12 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
     <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=1600&q=85&auto=format&fit=crop" alt="" loading="eager" onload="this.parentElement.classList.add('loaded')">
   </div>
   <div class="hero-content">
-    <div class="hero-tag">Begeleiding op maat · Persoonlijk &amp; betrokken</div>
-    <h1>Begeleiding die <em>rust</em> geeft.<br>Zorg die past bij jouw leven.</h1>
-    <p class="hero-lead">Bij Zorggroep de Witte Lotus ondersteunen we volwassenen met een verstandelijke beperking en/of psychische kwetsbaarheid — met persoonlijke aandacht en begeleiding die aansluit bij wat iemand nodig heeft.</p>
+    <div class="hero-tag" data-cms-edit="hero_tag" id="hero-tag">Begeleiding op maat · Persoonlijk &amp; betrokken</div>
+    <h1 data-cms-edit="hero_titel" id="hero-titel">Begeleiding die <em>rust</em> geeft.<br>Zorg die past bij jouw leven.</h1>
+    <p class="hero-lead" data-cms-edit="hero_intro" id="hero-intro">Bij Zorggroep de Witte Lotus ondersteunen we volwassenen met een verstandelijke beperking en/of psychische kwetsbaarheid — met persoonlijke aandacht en begeleiding die aansluit bij wat iemand nodig heeft.</p>
     <div class="hero-actions">
-      <a class="btn-primary" href="#aanmelden">Aanmelden</a>
-      <a class="btn-outline" href="#diensten">Ons aanbod</a>
+      <a class="btn-primary" href="#aanmelden" id="hero-knop1">Aanmelden</a>
+      <a class="btn-outline" href="#diensten" id="hero-knop2">Ons aanbod</a>
     </div>
   </div>
   <div class="hero-visual">
@@ -576,20 +367,12 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
     </div>
     <a class="choice-card gold" href="#aanmelden">
       <div class="c-ico gb">🙋</div>
-      <div>
-        <div class="c-lbl">Voor cliënten &amp; naasten</div>
-        <div class="c-ttl">Ik zoek begeleiding</div>
-        <div class="c-sub">Thuis, ambulant of in een woonvorm</div>
-      </div>
+      <div><div class="c-lbl">Voor cliënten &amp; naasten</div><div class="c-ttl">Ik zoek begeleiding</div><div class="c-sub">Thuis, ambulant of in een woonvorm</div></div>
       <div class="c-arr">→</div>
     </a>
     <a class="choice-card purple" href="#verwijzers">
       <div class="c-ico pb">🏥</div>
-      <div>
-        <div class="c-lbl">Voor verwijzers &amp; gemeenten</div>
-        <div class="c-ttl">Ik zoek een zorgaanbieder</div>
-        <div class="c-sub">Ambulante begeleiding · wonen met begeleiding</div>
-      </div>
+      <div><div class="c-lbl">Voor verwijzers &amp; gemeenten</div><div class="c-ttl">Ik zoek een zorgaanbieder</div><div class="c-sub">Ambulante begeleiding · wonen</div></div>
       <div class="c-arr">→</div>
     </a>
   </div>
@@ -597,22 +380,10 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
 
 <!-- STATS -->
 <div class="stats-stripe">
-  <div class="stat-item reveal stagger-1">
-    <div class="stat-num" data-count="18" data-suffix="+">0</div>
-    <div class="stat-lbl">Jaar leeftijd<br>doelgroep</div>
-  </div>
-  <div class="stat-item reveal stagger-2">
-    <div class="stat-num" data-count="100" data-suffix="%">0</div>
-    <div class="stat-lbl">Persoonlijke<br>begeleider</div>
-  </div>
-  <div class="stat-item reveal stagger-3">
-    <div class="stat-num" data-count="2" data-suffix="">0</div>
-    <div class="stat-lbl">Vormen van<br>begeleiding</div>
-  </div>
-  <div class="stat-item reveal stagger-4">
-    <div class="stat-num" data-count="0" data-suffix="24/7">0</div>
-    <div class="stat-lbl">Nabijheid waar<br>dat nodig is</div>
-  </div>
+  <div class="stat-item reveal stagger-1"><div class="stat-num" data-count="18" data-suffix="+">0</div><div class="stat-lbl">Jaar leeftijd<br>doelgroep</div></div>
+  <div class="stat-item reveal stagger-2"><div class="stat-num" data-count="100" data-suffix="%">0</div><div class="stat-lbl">Persoonlijke<br>begeleider</div></div>
+  <div class="stat-item reveal stagger-3"><div class="stat-num" data-count="2" data-suffix="">0</div><div class="stat-lbl">Vormen van<br>begeleiding</div></div>
+  <div class="stat-item reveal stagger-4"><div class="stat-num">24/7</div><div class="stat-lbl">Nabijheid waar<br>dat nodig is</div></div>
 </div>
 
 <!-- PROMISES -->
@@ -620,139 +391,84 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
   <div class="reveal"><div class="section-label">Wat ons kenmerkt</div></div>
   <div class="reveal stagger-1"><h2 class="section-title">Onze belofte aan jou</h2></div>
   <div class="reveal stagger-2"><p class="section-lead">We werken met aandacht voor de mens, niet alleen voor de hulpvraag.</p></div>
-  <div class="promise-grid">
-    <div class="promise-card reveal stagger-1"><div class="promise-num">01</div><h3>Duidelijke begeleiding</h3><p>Je weet bij wie je terechtkunt en wat je van ons mag verwachten. Geen verrassingen, wel duidelijke afspraken.</p></div>
-    <div class="promise-card reveal stagger-2"><div class="promise-num">02</div><h3>Persoonlijk en betrokken</h3><p>We werken met aandacht voor de mens. Jouw situatie, jouw netwerk, jouw doelen staan centraal.</p></div>
-    <div class="promise-card reveal stagger-3"><div class="promise-num">03</div><h3>Stap voor stap vooruit</h3><p>We helpen bij structuur, zelfstandigheid en meedoen in de samenleving. Samen, in jouw tempo.</p></div>
+  <div class="promise-grid" id="beloftes-grid">
+    <div class="promise-card reveal stagger-1"><div class="promise-num">01</div><h3 data-cms-edit="b1_titel">Duidelijke begeleiding</h3><p data-cms-edit="b1_tekst">Je weet bij wie je terechtkunt en wat je van ons mag verwachten. Geen verrassingen, wel duidelijke afspraken.</p></div>
+    <div class="promise-card reveal stagger-2"><div class="promise-num">02</div><h3 data-cms-edit="b2_titel">Persoonlijk en betrokken</h3><p data-cms-edit="b2_tekst">We werken met aandacht voor de mens. Jouw situatie, jouw netwerk, jouw doelen staan centraal.</p></div>
+    <div class="promise-card reveal stagger-3"><div class="promise-num">03</div><h3 data-cms-edit="b3_titel">Stap voor stap vooruit</h3><p data-cms-edit="b3_tekst">We helpen bij structuur, zelfstandigheid en meedoen in de samenleving. Samen, in jouw tempo.</p></div>
   </div>
 </section>
 
-<!-- CTA 1 – Na beloftes -->
+<!-- CTA 1 -->
 <div class="cta-bar dark reveal">
-  <div class="cta-bar-text">
-    <span class="cta-eyebrow">Klaar om te beginnen?</span>
-    <h3>Maak kennis met ons team</h3>
-    <p>Een gesprek is altijd vrijblijvend. We luisteren, denken mee en kijken samen wat het beste bij jou past.</p>
-  </div>
-  <div class="cta-bar-actions">
-    <a class="cta-btn-white" href="#contact">Kennismakingsgesprek aanvragen →</a>
-    <a class="cta-btn-ghost-white" href="#diensten">Bekijk ons aanbod</a>
-  </div>
+  <div class="cta-bar-text"><span class="cta-eyebrow">Klaar om te beginnen?</span><h3>Maak kennis met ons team</h3><p>Een gesprek is altijd vrijblijvend. We luisteren, denken mee en kijken samen wat het beste bij jou past.</p></div>
+  <div class="cta-bar-actions"><a class="cta-btn-white" href="#contact">Kennismakingsgesprek aanvragen →</a><a class="cta-btn-ghost-white" href="#diensten">Bekijk ons aanbod</a></div>
 </div>
 
 <!-- VOOR WIE -->
 <section class="for-who" id="voor-wie">
   <div class="for-who-img reveal-left">
-    <img src="https://images.unsplash.com/photo-1607748851687-ba9a10438621?w=900&q=80&auto=format&fit=crop" alt="Begeleider helpt cliënt thuis" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1607748851687-ba9a10438621?w=900&q=80&auto=format&fit=crop" alt="Begeleider helpt cliënt" loading="lazy">
   </div>
   <div class="for-who-content">
     <div class="reveal"><div class="section-label">Onze doelgroep</div></div>
     <div class="reveal stagger-1"><h2 class="section-title">Voor wie zijn wij er?</h2></div>
-    <div class="reveal stagger-2"><p class="for-who-lead">Zorggroep de Witte Lotus is er voor volwassenen vanaf 18 jaar die ondersteuning nodig hebben bij het dagelijks leven.</p></div>
+    <div class="reveal stagger-2"><p class="for-who-lead" data-cms-edit="vw_intro" id="vw-intro">Zorggroep de Witte Lotus is er voor volwassenen vanaf 18 jaar die ondersteuning nodig hebben bij het dagelijks leven.</p></div>
     <div class="target-list reveal stagger-3">
-      <span class="target-pill">Wonen</span>
-      <span class="target-pill">Dagstructuur</span>
-      <span class="target-pill">Zelfzorg</span>
-      <span class="target-pill">Administratie</span>
-      <span class="target-pill">Sociale contacten</span>
-      <span class="target-pill">Daginvulling</span>
-      <span class="target-pill">Zelfstandigheid</span>
+      <span class="target-pill">Wonen</span><span class="target-pill">Dagstructuur</span><span class="target-pill">Zelfzorg</span>
+      <span class="target-pill">Administratie</span><span class="target-pill">Sociale contacten</span><span class="target-pill">Daginvulling</span><span class="target-pill">Zelfstandigheid</span>
     </div>
-    <div class="reveal stagger-4"><p class="for-who-note">Wij begeleiden mensen met een verstandelijke beperking, mensen met psychische kwetsbaarheid en mensen bij wie deze hulpvragen samenkomen. Wanneer onze begeleiding niet passend is, denken wij mee.</p></div>
-    <div class="reveal stagger-5" style="margin-top:32px">
-      <a class="cta-btn-white" href="#contact" style="background:var(--gold);color:var(--pdd);box-shadow:0 4px 18px rgba(253,186,44,.35)">Past dit bij jou? Neem contact op →</a>
+    <div class="reveal stagger-4"><p class="for-who-note" data-cms-edit="vw_nota" id="vw-nota">Wij begeleiden mensen met een verstandelijke beperking, mensen met psychische kwetsbaarheid en mensen bij wie deze hulpvragen samenkomen.</p></div>
+    <div class="reveal stagger-5" style="margin-top:28px">
+      <a class="cta-btn-white" href="#contact" style="background:var(--gold);color:var(--pdd);display:inline-block;border-radius:30px;padding:13px 26px;font-size:15px;font-weight:500;text-decoration:none;box-shadow:0 4px 18px rgba(253,186,44,.35);">Past dit bij jou? Neem contact op →</a>
     </div>
   </div>
 </section>
+
+<!-- DIENSTEN -->
 <section class="services" id="diensten">
   <div class="reveal"><div class="section-label">Ons aanbod</div></div>
   <div class="reveal stagger-1"><h2 class="section-title">Twee vormen van begeleiding</h2></div>
   <div class="reveal stagger-2"><p class="section-lead">Of je nu zelfstandig woont of een veilige woonomgeving nodig hebt — we zijn er voor je.</p></div>
   <div class="services-grid">
     <div class="service-card reveal-left stagger-1">
-      <div class="svc-img">
-        <img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=800&q=80&auto=format&fit=crop&crop=center" alt="Ambulante begeleiding" loading="lazy">
-        <div class="svc-overlay"></div>
-        <span class="svc-tag">Ambulant</span>
-      </div>
+      <div class="svc-img"><img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=800&q=80&auto=format&fit=crop&crop=center" alt="Ambulante begeleiding" loading="lazy"><div class="svc-overlay"></div><span class="svc-tag">Ambulant</span></div>
       <div class="svc-body">
-        <h3>Ambulante begeleiding</h3>
-        <p>Woon je zelfstandig of bij familie? Een begeleider komt bij je thuis en ondersteunt bij wat nodig is.</p>
-        <ul class="svc-list">
-          <li>Planning en structuur</li>
-          <li>Administratie en instanties</li>
-          <li>Zelfzorg en huishoud</li>
-          <li>Versterken sociale contacten</li>
+        <h3 data-cms-edit="svc1_titel" id="svc1-titel">Ambulante begeleiding</h3>
+        <p data-cms-edit="svc1_tekst" id="svc1-tekst">Woon je zelfstandig of bij familie? Een begeleider komt bij je thuis en ondersteunt bij wat nodig is.</p>
+        <ul class="svc-list" id="svc1-punten">
+          <li>Planning en structuur</li><li>Administratie en instanties</li><li>Zelfzorg en huishoud</li><li>Sociale contacten</li>
         </ul>
-        <a class="svc-link" href="#aanmelden">Meer over ambulante begeleiding →</a>
-        <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--br)">
-          <a class="btn-primary" href="#contact" style="font-size:14px;padding:11px 22px">Aanmelden voor ambulant →</a>
-        </div>
+        <a class="svc-cta" href="#contact">Aanmelden voor ambulant →</a>
       </div>
     </div>
     <div class="service-card reveal-right stagger-2">
-      <div class="svc-img">
-        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80&auto=format&fit=crop&crop=center" alt="Wonen met begeleiding" loading="lazy">
-        <div class="svc-overlay"></div>
-        <span class="svc-tag">Wonen</span>
-      </div>
+      <div class="svc-img"><img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80&auto=format&fit=crop&crop=center" alt="Wonen met begeleiding" loading="lazy"><div class="svc-overlay"></div><span class="svc-tag">Wonen</span></div>
       <div class="svc-body">
-        <h3>Wonen met begeleiding</h3>
-        <p>Een veilige en stabiele woonplek met begeleiding dichtbij die past bij jouw dagelijks leven.</p>
-        <ul class="svc-list">
-          <li>Structuur en dagritme</li>
-          <li>Persoonlijke verzorging</li>
-          <li>Sociale vaardigheden</li>
-          <li>Contact met familie en netwerk</li>
+        <h3 data-cms-edit="svc2_titel" id="svc2-titel">Wonen met begeleiding</h3>
+        <p data-cms-edit="svc2_tekst" id="svc2-tekst">Een veilige en stabiele woonplek met begeleiding dichtbij die past bij jouw dagelijks leven.</p>
+        <ul class="svc-list" id="svc2-punten">
+          <li>Structuur en dagritme</li><li>Persoonlijke verzorging</li><li>Sociale vaardigheden</li><li>Contact met familie</li>
         </ul>
-        <a class="svc-link" href="#aanmelden">Meer over wonen met begeleiding →</a>
-        <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--br)">
-          <a class="btn-primary" href="#contact" style="font-size:14px;padding:11px 22px">Aanmelden voor wonen →</a>
-        </div>
+        <a class="svc-cta" href="#contact">Aanmelden voor wonen →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA 2 – Na diensten -->
+<!-- CTA 2 -->
 <div class="cta-bar light reveal">
-  <div class="cta-bar-text">
-    <span class="cta-eyebrow">Ambulant of wonen?</span>
-    <h3>Niet zeker welke begeleiding bij u past?</h3>
-    <p>Dat hoeft u niet zelf uit te zoeken. Tijdens een vrijblijvend kennismakingsgesprek kijken we samen naar de beste oplossing voor uw situatie.</p>
-  </div>
-  <div class="cta-bar-actions">
-    <a class="cta-btn-dark" href="#contact">Gratis adviesgesprek →</a>
-    <a class="cta-btn-ghost-dark" href="#werkwijze">Hoe wij werken</a>
-  </div>
+  <div class="cta-bar-text"><span class="cta-eyebrow">Ambulant of wonen?</span><h3>Niet zeker welke begeleiding bij u past?</h3><p>Tijdens een vrijblijvend kennismakingsgesprek kijken we samen naar de beste oplossing.</p></div>
+  <div class="cta-bar-actions"><a class="cta-btn-dark" href="#contact">Gratis adviesgesprek →</a><a class="cta-btn-ghost-dark" href="#werkwijze">Hoe wij werken</a></div>
 </div>
 
 <!-- GALERIE -->
 <div class="galerie-grid">
-  <div class="g-item reveal-scale stagger-1">
-    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=1000&q=80&auto=format&fit=crop&crop=center" alt="Zorgverlener in gesprek" loading="lazy">
-    <div class="g-label"><span>Persoonlijk contact</span></div>
-  </div>
-  <div class="g-item reveal-scale stagger-2">
-    <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=80&auto=format&fit=crop&crop=faces" alt="Begeleider" loading="lazy">
-    <div class="g-label"><span>Betrokken begeleiders</span></div>
-  </div>
-  <div class="g-item reveal-scale stagger-3">
-    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&auto=format&fit=crop&crop=center" alt="Dagactiviteit" loading="lazy">
-    <div class="g-label"><span>Dagstructuur &amp; activiteit</span></div>
-  </div>
-  <div class="g-item reveal-scale stagger-4">
-    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80&auto=format&fit=crop&crop=center" alt="Samen activiteiten" loading="lazy">
-    <div class="g-label"><span>Samen vooruit</span></div>
-  </div>
-  <div class="g-item reveal-scale stagger-5">
-    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop&crop=center" alt="Thuisbezoek begeleider" loading="lazy">
-    <div class="g-label"><span>Begeleiding aan huis</span></div>
-  </div>
-  <div class="g-item reveal-scale stagger-6">
-    <img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=600&q=80&auto=format&fit=crop&crop=center" alt="Warme woonplek" loading="lazy">
-    <div class="g-label"><span>Veilig thuis</span></div>
-  </div>
+  <div class="g-item reveal-scale stagger-1"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=1000&q=80&auto=format&fit=crop&crop=center" alt="" loading="lazy"><div class="g-label"><span>Persoonlijk contact</span></div></div>
+  <div class="g-item reveal-scale stagger-2"><img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=80&auto=format&fit=crop&crop=faces" alt="" loading="lazy"><div class="g-label"><span>Betrokken begeleiders</span></div></div>
+  <div class="g-item reveal-scale stagger-3"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80&auto=format&fit=crop&crop=center" alt="" loading="lazy"><div class="g-label"><span>Dagstructuur &amp; activiteit</span></div></div>
+  <div class="g-item reveal-scale stagger-4"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80&auto=format&fit=crop&crop=center" alt="" loading="lazy"><div class="g-label"><span>Samen vooruit</span></div></div>
+  <div class="g-item reveal-scale stagger-5"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop&crop=center" alt="" loading="lazy"><div class="g-label"><span>Begeleiding aan huis</span></div></div>
+  <div class="g-item reveal-scale stagger-6"><img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=600&q=80&auto=format&fit=crop&crop=center" alt="" loading="lazy"><div class="g-label"><span>Veilig thuis</span></div></div>
 </div>
 
 <!-- WERKWIJZE -->
@@ -768,27 +484,19 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
   </div>
 </section>
 
-<!-- CTA 3 – Na werkwijze -->
+<!-- CTA 3 -->
 <div class="cta-bar gold-bg reveal">
-  <div class="cta-bar-text">
-    <span class="cta-eyebrow">Stap 1 is het gemakkelijkst</span>
-    <h3>Begin met een kennismakingsgesprek</h3>
-    <p>Geen wachttijden, geen formulieren vooraf. Bel ons of stuur een bericht — we plannen samen een moment dat uitkomt.</p>
-  </div>
-  <div class="cta-bar-actions">
-    <a class="cta-btn-dark" href="#contact">Direct contact opnemen →</a>
-  </div>
+  <div class="cta-bar-text"><span class="cta-eyebrow">Stap 1 is het gemakkelijkst</span><h3>Begin met een kennismakingsgesprek</h3><p>Geen wachttijden, geen formulieren vooraf. Bel ons of stuur een bericht.</p></div>
+  <div class="cta-bar-actions"><a class="cta-btn-dark" href="#contact">Direct contact opnemen →</a></div>
 </div>
 
 <!-- SFEER BANNER -->
 <div class="sfeer-banner">
   <img class="sfeer-bg-img" id="sfeerImg" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1800&q=80&auto=format&fit=crop&crop=top" alt="" loading="lazy">
   <div class="sfeer-inner reveal">
-    <blockquote>Begeleiding die samen met de cliënt wordt vormgegeven. Waar mogelijk stimuleren wij zelfstandigheid.</blockquote>
+    <blockquote data-cms-edit="sfeer_quote" id="sfeer-quote">Begeleiding die samen met de cliënt wordt vormgegeven. Waar mogelijk stimuleren wij zelfstandigheid.</blockquote>
     <cite>— Zorggroep de Witte Lotus</cite>
-    <div style="margin-top:32px">
-      <a class="cta-btn-white" href="#contact" style="display:inline-flex;align-items:center;gap:8px">Neem contact op &nbsp;→</a>
-    </div>
+    <br><a class="sfeer-cta" href="#contact">Neem contact op →</a>
   </div>
 </div>
 
@@ -805,25 +513,15 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
     </div>
   </div>
   <div class="kw-img-wrap reveal-right">
-    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&q=80&auto=format&fit=crop&crop=top" alt="Zorgverlener met cliënt" loading="lazy">
-    <div class="kw-caption">
-      <p>We werken met aandacht voor de mens, niet alleen voor de hulpvraag.</p>
-      <span>Zorggroep de Witte Lotus</span>
-    </div>
+    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&q=80&auto=format&fit=crop&crop=top" alt="Zorgverlener" loading="lazy">
+    <div class="kw-caption"><p>We werken met aandacht voor de mens, niet alleen voor de hulpvraag.</p><span>Zorggroep de Witte Lotus</span></div>
   </div>
 </section>
 
-<!-- CTA 4 – Na kwaliteit -->
+<!-- CTA 4 -->
 <div class="cta-bar mid reveal">
-  <div class="cta-bar-text">
-    <span class="cta-eyebrow">Kwaliteit staat voorop</span>
-    <h3>Ervaar het zelf — plan een gesprek</h3>
-    <p>We laten onze kwaliteit zien in de praktijk. Maak een afspraak en ontdek hoe wij u of uw naaste kunnen ondersteunen.</p>
-  </div>
-  <div class="cta-bar-actions">
-    <a class="cta-btn-white" href="#contact">Afspraak maken →</a>
-    <a class="cta-btn-ghost-white" href="tel:[invullen]">☎ Bel ons direct</a>
-  </div>
+  <div class="cta-bar-text"><span class="cta-eyebrow">Kwaliteit staat voorop</span><h3>Ervaar het zelf — plan een gesprek</h3><p>Maak een afspraak en ontdek hoe wij u of uw naaste kunnen ondersteunen.</p></div>
+  <div class="cta-bar-actions"><a class="cta-btn-white" href="#contact">Afspraak maken →</a><a class="cta-btn-ghost-white" id="tel-cta" href="#">☎ Bel ons direct</a></div>
 </div>
 
 <!-- AANMELDEN -->
@@ -832,252 +530,225 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
   <div class="reveal stagger-1"><h2 class="section-title">Aanmelden en financiering</h2></div>
   <div class="reveal stagger-2"><p class="section-lead">Aanmelden begint met een kennismaking. We bespreken samen welke begeleiding het beste aansluit.</p></div>
   <div class="aanmelden-cards">
-    <div class="aanmeld-card reveal stagger-1"><span class="card-icon">👤</span><h3>Cliënt of naaste</h3><p>Neem contact met ons op voor een kennismakingsgesprek. Samen bespreken we de mogelijkheden.</p><a class="card-btn dark" href="#contact">Contact opnemen →</a></div>
+    <div class="aanmeld-card reveal stagger-1"><span class="card-icon">👤</span><h3>Cliënt of naaste</h3><p>Neem contact op voor een kennismakingsgesprek. Samen bespreken we de mogelijkheden.</p><a class="card-btn dark" href="#contact">Contact opnemen →</a></div>
     <div class="aanmeld-card featured reveal stagger-2"><span class="card-icon">🏥</span><h3>Verwijzer</h3><p>Verwijzers kunnen contact opnemen voor overleg, aanmelding of informatie over ons aanbod.</p><a class="card-btn light" href="#contact">Overleg aanvragen →</a></div>
     <div class="aanmeld-card reveal stagger-3"><span class="card-icon">📄</span><h3>Al een indicatie?</h3><p>Heb je al een indicatie of beschikking? We kijken samen welke ondersteuning passend is.</p><a class="card-btn outline" href="#contact">Direct aanmelden →</a></div>
   </div>
 </section>
 
-<!-- VERWIJZERS -->
-<section class="verwijzers-section" id="verwijzers">
-  <div class="reveal"><div class="section-label">Voor professionals</div></div>
-  <div class="reveal stagger-1"><h2 class="section-title">Voor verwijzers, gemeenten en zorgkantoren</h2></div>
-  <div class="reveal stagger-2"><p class="section-lead">We werken met een persoonlijke intake, ondersteuningsplan en vaste evaluatiemomenten.</p></div>
-  <div class="promise-grid">
-    <div class="promise-card reveal stagger-1"><div class="promise-num" style="font-size:28px">🎯</div><h3>Stabiliteit</h3><p>Een stabiele basis als fundament voor verdere ontwikkeling.</p></div>
-    <div class="promise-card reveal stagger-2"><div class="promise-num" style="font-size:28px">⭐</div><h3>Kwaliteit van leven</h3><p>Welzijn, participatie en betekenisvolle dagen voor iedere cliënt.</p></div>
-    <div class="promise-card reveal stagger-3"><div class="promise-num" style="font-size:28px">📈</div><h3>Ontwikkeling</h3><p>Zelfstandigheid stimuleren binnen de mogelijkheden van de cliënt.</p></div>
-  </div>
-</section>
-
-  </div>
-</section>
-
-<!-- CTA 5 – Na verwijzers (voor professionals) -->
+<!-- CTA 5 -->
 <div class="cta-bar dark reveal">
-  <div class="cta-bar-text">
-    <span class="cta-eyebrow">Voor verwijzers &amp; professionals</span>
-    <h3>Wilt u een cliënt aanmelden of overleggen?</h3>
-    <p>Bel of mail ons direct. We reageren snel en denken graag mee over de meest passende begeleiding voor uw cliënt.</p>
-  </div>
-  <div class="cta-bar-actions">
-    <a class="cta-btn-white" href="#contact">Aanmelding sturen →</a>
-    <a class="cta-btn-ghost-white" href="mailto:[invullen]">✉ E-mail ons</a>
-  </div>
+  <div class="cta-bar-text"><span class="cta-eyebrow">Voor verwijzers &amp; professionals</span><h3>Wilt u een cliënt aanmelden of overleggen?</h3><p>Bel of mail ons direct. We reageren snel en denken graag mee.</p></div>
+  <div class="cta-bar-actions"><a class="cta-btn-white" href="#contact">Aanmelding sturen →</a><a class="cta-btn-ghost-white" id="email-cta" href="#">✉ E-mail ons</a></div>
 </div>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-info reveal-left">
-    <h2>Contact opnemen</h2>
-    <p>Wil je meer weten of een aanmelding doen? Wij helpen je graag verder.</p>
+    <h2 data-cms-edit="ct_titel" id="ct-titel">Contact opnemen</h2>
+    <p data-cms-edit="ct_intro" id="ct-intro">Wil je meer weten of een aanmelding doen? Wij helpen je graag verder.</p>
     <div class="contact-details">
-      <div class="contact-row"><div class="cr-ico">📞</div><div><span class="cr-lbl">Telefoon</span><span class="cr-val">[invullen]</span></div></div>
-      <div class="contact-row"><div class="cr-ico">✉️</div><div><span class="cr-lbl">E-mail</span><span class="cr-val">[invullen]</span></div></div>
-      <div class="contact-row"><div class="cr-ico">📍</div><div><span class="cr-lbl">Adres</span><span class="cr-val">[invullen]</span></div></div>
-      <div class="contact-row"><div class="cr-ico">🕐</div><div><span class="cr-lbl">Openingstijden</span><span class="cr-val">[invullen]</span></div></div>
+      <div class="contact-row"><div class="cr-ico">📞</div><div><span class="cr-lbl">Telefoon</span><span class="cr-val" data-cms-edit="contact_tel" id="ct-tel">[invullen]</span></div></div>
+      <div class="contact-row"><div class="cr-ico">✉️</div><div><span class="cr-lbl">E-mail</span><span class="cr-val" data-cms-edit="contact_email" id="ct-email">[invullen]</span></div></div>
+      <div class="contact-row"><div class="cr-ico">📍</div><div><span class="cr-lbl">Adres</span><span class="cr-val" data-cms-edit="contact_adres" id="ct-adres">[invullen]</span></div></div>
+      <div class="contact-row"><div class="cr-ico">🕐</div><div><span class="cr-lbl">Openingstijden</span><span class="cr-val" data-cms-edit="contact_uren" id="ct-uren">[invullen]</span></div></div>
     </div>
   </div>
   <div class="contact-form reveal-right">
     <h3>Stuur ons een bericht</h3>
     <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-    <input type="hidden" name="form-name" value="contact">
-    <p hidden><label>Bot field: <input name="bot-field"></label></p>
-    <div class="form-row">
-      <div class="form-group"><label>Voornaam</label><input type="text" placeholder="Jouw voornaam" name="voornaam"></div>
-      <div class="form-group"><label>Achternaam</label><input type="text" placeholder="Jouw achternaam" name="achternaam"></div>
-    </div>
-    <div class="form-group"><label>E-mailadres</label><input type="email" placeholder="jouw@email.nl" name="email"></div>
-    <div class="form-group"><label>Ik ben</label><select name="type"><option>Cliënt of naaste</option><option>Verwijzer</option><option>Gemeente / zorgkantoor</option><option>Anders</option></select></div>
-    <div class="form-group"><label>Bericht</label><textarea placeholder="Hoe kunnen we je helpen?" name="bericht"></textarea></div>
-    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:contents"><input type="hidden" name="form-name" value="contact"><p hidden><input name="bot-field"></p><button class="submit-btn" type="submit">Verstuur bericht →</button>
+      <input type="hidden" name="form-name" value="contact">
+      <p hidden><label>Bot: <input name="bot-field"></label></p>
+      <div class="form-row">
+        <div class="form-group"><label>Voornaam</label><input type="text" name="voornaam" placeholder="Jouw voornaam" required></div>
+        <div class="form-group"><label>Achternaam</label><input type="text" name="achternaam" placeholder="Jouw achternaam" required></div>
+      </div>
+      <div class="form-group"><label>E-mailadres</label><input type="email" name="email" placeholder="jouw@email.nl" required></div>
+      <div class="form-group"><label>Ik ben</label>
+        <select name="type" required>
+          <option value="">Maak een keuze...</option>
+          <option>Cliënt of naaste</option>
+          <option>Verwijzer</option>
+          <option>Gemeente / zorgkantoor</option>
+          <option>Anders</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Bericht</label><textarea name="bericht" placeholder="Hoe kunnen we je helpen?" required></textarea></div>
+      <button type="submit" class="submit-btn" id="submitBtn">Verstuur bericht →</button>
     </form>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <a class="logo" href="#">
-        <div class="logo-mark" style="background:rgba(255,255,255,.1)">
-          <svg viewBox="0 0 44 44" fill="none" width="44" height="44">
-            <ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2"/>
-            <ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(51.4 22 22)"/>
-            <ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(102.9 22 22)"/>
-            <ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(154.3 22 22)"/>
-            <ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(205.7 22 22)"/>
-            <ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(257.1 22 22)"/>
-            <ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(308.6 22 22)"/>
-            <circle cx="22" cy="22" r="6" fill="#FDBA2C"/>
-          </svg>
-        </div>
-        <div class="logo-text">
-          <span style="color:rgba(255,255,255,.55)">zorggroep</span>
-          <span style="color:#fff">de Witte Lotus</span>
-        </div>
-      </a>
-      <p>Begeleiding die rust geeft. Zorg die past bij jouw leven. Voor volwassenen met een verstandelijke beperking en/of psychische kwetsbaarheid.</p>
+      <a class="logo" href="#"><div class="logo-mark" style="background:rgba(255,255,255,.1)"><svg viewBox="0 0 44 44" fill="none" width="44" height="44"><ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2"/><ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(51.4 22 22)"/><ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(102.9 22 22)"/><ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(154.3 22 22)"/><ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(205.7 22 22)"/><ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(257.1 22 22)"/><ellipse cx="22" cy="9" rx="5" ry="9" fill="rgba(255,255,255,.7)" stroke="#FDBA2C" stroke-width="1.2" transform="rotate(308.6 22 22)"/><circle cx="22" cy="22" r="6" fill="#FDBA2C"/></svg></div><div class="logo-text"><span style="color:rgba(255,255,255,.55)">zorggroep</span><span style="color:#fff">de Witte Lotus</span></div></a>
+      <p id="footer-intro">Begeleiding die rust geeft. Zorg die past bij jouw leven.</p>
     </div>
-    <div>
-      <h4>Diensten</h4>
-      <ul>
-        <li><a href="#diensten">Ambulante begeleiding</a></li>
-        <li><a href="#diensten">Wonen met begeleiding</a></li>
-        <li><a href="#aanmelden">Aanmelden</a></li>
-        <li><a href="#verwijzers">Voor verwijzers</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Informatie</h4>
-      <ul>
-        <li><a href="#over">Over ons</a></li>
-        <li><a href="#werkwijze">Werkwijze</a></li>
-        <li><a href="#kwaliteit">Kwaliteit</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
+    <div><h4>Diensten</h4><ul><li><a href="#diensten">Ambulante begeleiding</a></li><li><a href="#diensten">Wonen met begeleiding</a></li><li><a href="#aanmelden">Aanmelden</a></li></ul></div>
+    <div><h4>Informatie</h4><ul><li><a href="#over">Over ons</a></li><li><a href="#werkwijze">Werkwijze</a></li><li><a href="#kwaliteit">Kwaliteit</a></li><li><a href="#contact">Contact</a></li></ul></div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2025 Zorggroep de Witte Lotus</span>
-    <span>Privacy · Klachten · Sitemap</span>
-  </div>
+  <div class="footer-bottom"><span>© 2025 Zorggroep de Witte Lotus</span><span>Privacy · Klachten · Sitemap</span></div>
 </footer>
 
-<!-- STICKY MOBILE CTA -->
-<div class="sticky-cta" id="stickyCta">
-  <div>
-    <strong>Interesse in begeleiding?</strong>
-    <p>Plan een vrijblijvend gesprek</p>
-  </div>
-  <a class="sticky-cta-btn" href="#contact">Contact opnemen →</a>
-</div>
-
 <script>
-// ── Cursor glow
+// ── Load content from _data/inhoud.yml and populate page ──
+async function loadContent() {
+  try {
+    const res = await fetch('/_data/inhoud.yml');
+    if (!res.ok) return; // Fallback: keep default HTML content
+    const text = await res.text();
+    const d = jsyaml.load(text);
+
+    // Helper: set text of element by id
+    const set = (id, val) => { const el = document.getElementById(id); if(el && val) el.textContent = val; };
+    const setHref = (id, val) => { const el = document.getElementById(id); if(el && val) el.href = val; };
+
+    // Contact details
+    set('ct-tel', d.contact?.telefoon);
+    set('ct-email', d.contact?.email);
+    set('ct-adres', d.contact?.adres);
+    set('ct-uren', d.contact?.openingstijden);
+    setHref('tel-cta', 'tel:' + (d.contact?.telefoon || ''));
+    setHref('email-cta', 'mailto:' + (d.contact?.email || ''));
+
+    // Hero
+    set('hero-tag', d.hero?.tag);
+    if(d.hero?.titel) document.getElementById('hero-titel').innerHTML = d.hero.titel;
+    set('hero-intro', d.hero?.intro);
+    set('hero-knop1', d.hero?.knop_aanmelden);
+    set('hero-knop2', d.hero?.knop_aanbod);
+
+    // Beloftes
+    if(d.beloftes && d.beloftes.length >= 3) {
+      ['b1','b2','b3'].forEach((key, i) => {
+        const cards = document.querySelectorAll('.promise-card');
+        if(cards[i]) {
+          const h3 = cards[i].querySelector('h3');
+          const p  = cards[i].querySelector('p');
+          if(h3) h3.textContent = d.beloftes[i].titel;
+          if(p)  p.textContent  = d.beloftes[i].tekst;
+        }
+      });
+    }
+
+    // Voor wie
+    set('vw-intro', d.voor_wie?.intro);
+    set('vw-nota',  d.voor_wie?.nota);
+
+    // Diensten
+    set('svc1-titel', d.diensten?.ambulant?.titel);
+    set('svc1-tekst', d.diensten?.ambulant?.tekst);
+    set('svc2-titel', d.diensten?.wonen?.titel);
+    set('svc2-tekst', d.diensten?.wonen?.tekst);
+
+    // Dienst punten
+    ['svc1-punten','svc2-punten'].forEach((id, i) => {
+      const key = i === 0 ? 'ambulant' : 'wonen';
+      const pts = d.diensten?.[key]?.punten;
+      const ul = document.getElementById(id);
+      if(ul && pts) {
+        ul.innerHTML = pts.map(p => `<li>${p}</li>`).join('');
+      }
+    });
+
+    // Quote
+    set('sfeer-quote', d.quote);
+
+    // Contact section
+    set('ct-titel', d.contact_sectie?.titel);
+    set('ct-intro', d.contact_sectie?.intro);
+
+  } catch(e) {
+    console.log('Content load skipped:', e.message);
+  }
+}
+loadContent();
+
+// ── Cursor glow ──
 const glow = document.getElementById('cursorGlow');
 document.addEventListener('mousemove', e => {
   glow.style.left = e.clientX + 'px';
   glow.style.top  = e.clientY + 'px';
 });
 
-// ── Nav shadow on scroll
-const nav = document.getElementById('mainNav');
+// ── Nav shadow on scroll ──
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-}, {passive:true});
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
 
-// ── Parallax sfeer banner
-const sfeerImg = document.getElementById('sfeerImg');
-window.addEventListener('scroll', () => {
-  const banner = sfeerImg.parentElement;
-  const rect   = banner.getBoundingClientRect();
-  if(rect.bottom < 0 || rect.top > window.innerHeight) return;
-  const progress = rect.top / window.innerHeight;
-  sfeerImg.style.transform = `translateY(${progress * 60}px)`;
-}, {passive:true});
-
-// ── Scroll reveal (IntersectionObserver)
-const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.classList.add('visible');
-      revealObs.unobserve(e.target);
+  // Parallax sfeer
+  const img = document.getElementById('sfeerImg');
+  if(img) {
+    const rect = img.parentElement.getBoundingClientRect();
+    if(rect.bottom > 0 && rect.top < window.innerHeight) {
+      img.style.transform = `translateY(${(rect.top / window.innerHeight) * 60}px)`;
     }
-  });
-}, {threshold: 0.12});
-revealEls.forEach(el => revealObs.observe(el));
-
-// ── Steps golden line animation
-const stepsRow = document.getElementById('stepsRow');
-const stepsObs = new IntersectionObserver(entries => {
-  if(entries[0].isIntersecting) {
-    stepsRow.classList.add('animated');
-    stepsObs.disconnect();
   }
+}, {passive:true});
+
+// ── Scroll reveal ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, {threshold: 0.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => obs.observe(el));
+
+// ── Steps line animation ──
+const stepsObs = new IntersectionObserver(entries => {
+  if(entries[0].isIntersecting){ document.getElementById('stepsRow').classList.add('animated'); stepsObs.disconnect(); }
 }, {threshold: 0.5});
-stepsObs.observe(stepsRow);
+stepsObs.observe(document.getElementById('stepsRow'));
 
-// ── Count-up animation for stats
-function animateCount(el, target, suffix, duration) {
+// ── Count-up stats ──
+function countUp(el, target, suffix, dur) {
   const start = performance.now();
-  const update = (now) => {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    // Ease out cubic
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const value = Math.round(eased * target);
-    el.textContent = suffix === '24/7' ? '24/7' : value + suffix;
-    if(progress < 1) requestAnimationFrame(update);
+  const tick = now => {
+    const p = Math.min((now - start) / dur, 1);
+    const v = Math.round((1 - Math.pow(1-p, 3)) * target);
+    el.textContent = v + suffix;
+    if(p < 1) requestAnimationFrame(tick);
   };
-  requestAnimationFrame(update);
+  requestAnimationFrame(tick);
 }
-
-const statNums = document.querySelectorAll('.stat-num[data-count]');
-const statsObs = new IntersectionObserver(entries => {
+const cObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(e.isIntersecting) {
-      const el     = e.target;
-      const count  = parseInt(el.dataset.count);
-      const suffix = el.dataset.suffix;
-      animateCount(el, count, suffix, 1400);
-      statsObs.unobserve(el);
+      const n = parseInt(e.target.dataset.count||'0');
+      const s = e.target.dataset.suffix||'';
+      if(n) countUp(e.target, n, s, 1400);
+      cObs.unobserve(e.target);
     }
   });
-}, {threshold: 0.5});
-statNums.forEach(el => statsObs.observe(el));
+}, {threshold:0.5});
+document.querySelectorAll('.stat-num[data-count]').forEach(el => cObs.observe(el));
 
-// ── Staggered target pills entrance
-const pillsContainer = document.querySelector('.target-list');
-if(pillsContainer) {
-  const pillObs = new IntersectionObserver(entries => {
-    if(entries[0].isIntersecting) {
-      const pills = pillsContainer.querySelectorAll('.target-pill');
-      pills.forEach((p, i) => {
-        p.style.opacity    = '0';
-        p.style.transform  = 'translateY(14px)';
-        p.style.transition = `opacity .4s ease ${i*80}ms, transform .4s ease ${i*80}ms`;
-        setTimeout(() => { p.style.opacity = '1'; p.style.transform = 'translateY(0)'; }, 50);
-      });
-      pillObs.disconnect();
-    }
-  }, {threshold: 0.4});
-  pillObs.observe(pillsContainer);
-}
+// ── Pills entrance ──
+const pillsObs = new IntersectionObserver(entries => {
+  if(entries[0].isIntersecting) {
+    document.querySelectorAll('.target-pill').forEach((p,i) => {
+      p.style.cssText = `opacity:0;transform:translateY(14px);transition:opacity .4s ease ${i*80}ms,transform .4s ease ${i*80}ms`;
+      setTimeout(() => { p.style.opacity='1'; p.style.transform='translateY(0)'; }, 50);
+    });
+    pillsObs.disconnect();
+  }
+}, {threshold:0.4});
+const tl = document.querySelector('.target-list');
+if(tl) pillsObs.observe(tl);
 
-// ── Smooth scroll all #contact links → focus first field
-document.querySelectorAll('a[href="#contact"]').forEach(link => {
-  link.addEventListener('click', e => {
+// ── Smooth scroll to form ──
+document.querySelectorAll('a[href="#contact"]').forEach(a => {
+  a.addEventListener('click', e => {
     e.preventDefault();
     document.getElementById('contact').scrollIntoView({behavior:'smooth'});
-    setTimeout(() => {
-      const firstInput = document.querySelector('#contact input[type="text"]');
-      if(firstInput) firstInput.focus();
-    }, 600);
+    setTimeout(() => { const f = document.querySelector('#contact input[type="text"]'); if(f) f.focus(); }, 600);
   });
 });
 
-// ── Hide sticky CTA when contact section is visible
-const contactSection = document.getElementById('contact');
-const stickyCta = document.getElementById('stickyCta');
-if(contactSection && stickyCta) {
-  const hideObs = new IntersectionObserver(entries => {
-    stickyCta.style.transform = entries[0].isIntersecting ? 'translateY(110%)' : 'translateY(0)';
-    stickyCta.style.transition = 'transform .3s ease';
-  }, {threshold: 0.1});
-  hideObs.observe(contactSection);
-}
-
-
-document.querySelector('.submit-btn')?.addEventListener('click', function(e) {
-  const btn = this;
-  btn.style.transition = 'background .2s';
+// ── Submit button feedback ──
+document.querySelector('.contact-form form')?.addEventListener('submit', function(e) {
+  const btn = document.getElementById('submitBtn');
   btn.textContent = 'Verstuurd ✓';
   btn.style.background = '#4CAF50';
-  setTimeout(() => {
-    btn.textContent = 'Verstuur bericht →';
-    btn.style.background = '';
-  }, 2000);
 });
 </script>
 </body>

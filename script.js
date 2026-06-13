@@ -74,6 +74,13 @@ async function loadData() {
     s('svc2-titel', homepage.svc2_titel); s('svc2-tekst', homepage.svc2_tekst);
     src('svc2-foto', homepage.svc2_foto);
 
+    // Dagbesteding
+    s('dag-titel', homepage.dag_titel);
+    s('dag-tekst1', homepage.dag_tekst1);
+    s('dag-tekst2', homepage.dag_tekst2);
+    s('dag-tekst3', homepage.dag_tekst3);
+    src('dag-foto', homepage.dag_foto);
+
     // Sfeer
     src('sfeer-foto', homepage.sfeer_foto);
     s('sfeer-quote', homepage.sfeer_quote);

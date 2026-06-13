@@ -22,7 +22,8 @@ body{font-family:'DM Sans',sans-serif;font-size:16px;color:var(--tb);background:
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:72px;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--br);transition:box-shadow .3s}
 nav.scrolled{box-shadow:0 4px 24px rgba(63,0,128,.1)}
 .logo{display:flex;align-items:center;gap:14px;text-decoration:none}
-.logo-mark{width:44px;height:44px;border-radius:50%;background:var(--pp);display:flex;align-items:center;justify-content:center;transition:transform .4s}
+.logo-mark{height:44px;display:flex;align-items:center;justify-content:center;transition:transform .4s}
+.logo-mark img{height:44px;width:auto;display:block}
 .logo:hover .logo-mark{transform:rotate(20deg)}
 .logo-text span:first-child{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pm);font-weight:500}
 .logo-text span:last-child{display:block;font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--pdd)}
@@ -274,7 +275,7 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
 <nav id="mainNav">
   <a class="logo" href="#">
     <div class="logo-mark">
-      <img src="/images/uploads/de_Witte_Lotus_logo.svg" alt="Logo de witte lotus" height="50px">
+      <img src="/images/uploads/de_Witte_Lotus_logo.svg" alt="Logo de witte lotus">
     </div>
     <div class="logo-text"><span>zorggroep</span><span id="nav-naam">de Witte Lotus</span></div>
   </a>
@@ -291,7 +292,7 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg" id="heroBg">
-    <img id="hero-bg-img" src="images/uploads/hero_backgrounud.jpg" alt="Begeleiding Witte Lotus">
+    <img id="hero-bg-img" src="images/uploads/hero_background.jpg" alt="Begeleiding Witte Lotus">
   </div>
   <div class="hero-content">
     <div class="hero-tag">Begeleiding op maat · Persoonlijk &amp; betrokken</div>
@@ -507,7 +508,7 @@ footer ul li a:hover{color:var(--w);padding-left:6px}
     <div class="footer-brand">
       <a class="logo" href="#">
         <div class="logo-mark" style="background:rgba(255,255,255,.1)">
-          <img src="/images/uploads/de_Witte_Lotus_logo.svg" alt="Logo de witte lotus" height="80px">
+          <img src="/images/uploads/de_Witte_Lotus_logo.svg" alt="Logo de witte lotus">
         </div>
         <div class="logo-text"><span style="color:rgba(255,255,255,.55)">zorggroep</span><span style="color:#fff" id="footer-naam">de Witte Lotus</span></div>
       </a>

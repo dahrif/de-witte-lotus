@@ -6,62 +6,179 @@ locale: nl
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
+# ── COLLECTIES ──────────────────────────────
 collections:
-  - name: "instellingen"
-    label: "⚙️ Website instellingen"
+
+  - name: "site"
+    label: "🌐 Website beheren"
     files:
+
+      # ── 1. CONTACTGEGEVENS ──
       - name: "contact"
         label: "📞 Contactgegevens"
-        file: "data/contact.json"
+        file: "_data/contact.json"
         fields:
-          - {label: "Telefoonnummer", name: "telefoon", widget: "string", hint: "Bijv. +31 20 123 4567"}
-          - {label: "E-mailadres", name: "email", widget: "string"}
-          - {label: "Adres", name: "adres", widget: "string"}
-          - {label: "Openingstijden", name: "openingstijden", widget: "string", hint: "Bijv. Ma-Vr 9:00-17:00"}
+          - label: "Organisatienaam"
+            name: "naam"
+            widget: "string"
+            default: "Zorggroep de Witte Lotus"
+          - label: "Telefoonnummer"
+            name: "telefoon"
+            widget: "string"
+            hint: "Bijv. +31 20 123 4567"
+          - label: "E-mailadres"
+            name: "email"
+            widget: "string"
+          - label: "Adres regel 1"
+            name: "adres1"
+            widget: "string"
+            hint: "Straatnaam en huisnummer"
+          - label: "Adres regel 2"
+            name: "adres2"
+            widget: "string"
+            hint: "Postcode en stad"
+            required: false
+          - label: "Openingstijden"
+            name: "openingstijden"
+            widget: "text"
+            hint: "Bijv. Maandag t/m vrijdag: 9:00 - 17:00"
 
-      - name: "hero"
+      # ── 2. HOMEPAGINA TEKSTEN ──
+      - name: "homepage"
         label: "🏠 Homepagina teksten"
-        file: "data/hero.json"
+        file: "_data/homepage.json"
         fields:
-          - {label: "Grote titel", name: "titel", widget: "string"}
-          - {label: "Intro tekst", name: "intro", widget: "text"}
+          - label: "── Hero sectie ──"
+            name: "hero_divider"
+            widget: "hidden"
+            default: ""
+          - label: "Grote titel"
+            name: "hero_titel"
+            widget: "string"
+            default: "Begeleiding die rust geeft."
+          - label: "Grote titel (tweede regel, cursief woord)"
+            name: "hero_cursief"
+            widget: "string"
+            default: "rust"
+            hint: "Dit woord wordt cursief weergegeven in de titel"
+          - label: "Intro tekst"
+            name: "hero_intro"
+            widget: "text"
+          - label: "Hero afbeelding"
+            name: "hero_foto"
+            widget: "image"
+            required: false
+            hint: "Grote foto op de achtergrond van de hero sectie"
+          - label: "Portret foto (rechts)"
+            name: "hero_portret"
+            widget: "image"
+            required: false
 
-      - name: "beloftes"
-        label: "✨ Onze beloftes"
-        file: "data/beloftes.json"
-        fields:
-          - label: "Belofte 1"
-            name: "b1"
-            widget: "object"
-            fields:
-              - {label: "Titel", name: "titel", widget: "string"}
-              - {label: "Tekst", name: "tekst", widget: "text"}
-          - label: "Belofte 2"
-            name: "b2"
-            widget: "object"
-            fields:
-              - {label: "Titel", name: "titel", widget: "string"}
-              - {label: "Tekst", name: "tekst", widget: "text"}
-          - label: "Belofte 3"
-            name: "b3"
-            widget: "object"
-            fields:
-              - {label: "Titel", name: "titel", widget: "string"}
-              - {label: "Tekst", name: "tekst", widget: "text"}
+          - label: "── Beloftes ──"
+            name: "prom_divider"
+            widget: "hidden"
+            default: ""
+          - label: "Belofte 1 – Titel"
+            name: "b1_titel"
+            widget: "string"
+          - label: "Belofte 1 – Tekst"
+            name: "b1_tekst"
+            widget: "text"
+          - label: "Belofte 2 – Titel"
+            name: "b2_titel"
+            widget: "string"
+          - label: "Belofte 2 – Tekst"
+            name: "b2_tekst"
+            widget: "text"
+          - label: "Belofte 3 – Titel"
+            name: "b3_titel"
+            widget: "string"
+          - label: "Belofte 3 – Tekst"
+            name: "b3_tekst"
+            widget: "text"
 
-      - name: "diensten"
-        label: "🏥 Diensten"
-        file: "data/diensten.json"
+          - label: "── Voor wie ──"
+            name: "vw_divider"
+            widget: "hidden"
+            default: ""
+          - label: "Intro tekst"
+            name: "vw_intro"
+            widget: "text"
+          - label: "Foto (links)"
+            name: "vw_foto"
+            widget: "image"
+            required: false
+          - label: "Nota tekst (onderaan)"
+            name: "vw_nota"
+            widget: "text"
+
+          - label: "── Diensten ──"
+            name: "svc_divider"
+            widget: "hidden"
+            default: ""
+          - label: "Ambulant – Titel"
+            name: "svc1_titel"
+            widget: "string"
+          - label: "Ambulant – Beschrijving"
+            name: "svc1_tekst"
+            widget: "text"
+          - label: "Ambulant – Foto"
+            name: "svc1_foto"
+            widget: "image"
+            required: false
+          - label: "Wonen – Titel"
+            name: "svc2_titel"
+            widget: "string"
+          - label: "Wonen – Beschrijving"
+            name: "svc2_tekst"
+            widget: "text"
+          - label: "Wonen – Foto"
+            name: "svc2_foto"
+            widget: "image"
+            required: false
+
+          - label: "── Sfeer sectie ──"
+            name: "sfeer_divider"
+            widget: "hidden"
+            default: ""
+          - label: "Quote tekst"
+            name: "sfeer_quote"
+            widget: "text"
+          - label: "Sfeer foto (achtergrond)"
+            name: "sfeer_foto"
+            widget: "image"
+            required: false
+
+          - label: "── Kwaliteit sectie ──"
+            name: "kw_divider"
+            widget: "hidden"
+            default: ""
+          - label: "Kwaliteit foto (rechts)"
+            name: "kw_foto"
+            widget: "image"
+            required: false
+
+          - label: "── Contact sectie ──"
+            name: "ct_divider"
+            widget: "hidden"
+            default: ""
+          - label: "Contact intro tekst"
+            name: "ct_intro"
+            widget: "text"
+
+      # ── 3. NAVIGATIE ──
+      - name: "navigatie"
+        label: "🔗 Navigatie & knoppen"
+        file: "_data/navigatie.json"
         fields:
-          - label: "Ambulante begeleiding"
-            name: "ambulant"
-            widget: "object"
-            fields:
-              - {label: "Titel", name: "titel", widget: "string"}
-              - {label: "Omschrijving", name: "tekst", widget: "text"}
-          - label: "Wonen met begeleiding"
-            name: "wonen"
-            widget: "object"
-            fields:
-              - {label: "Titel", name: "titel", widget: "string"}
-              - {label: "Omschrijving", name: "tekst", widget: "text"}
+          - label: "Knop 'Aanmelden' tekst"
+            name: "btn_aanmelden"
+            widget: "string"
+            default: "Aanmelden"
+          - label: "Knop 'Kennismaken' tekst"
+            name: "btn_kennismaken"
+            widget: "string"
+            default: "Kennismaken →"
+          - label: "Footer tekst"
+            name: "footer_tekst"
+            widget: "text"
